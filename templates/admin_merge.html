@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Merge PreUser with User{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Merge PreUser with Registered User</h1>
+    <p>Select a PreUser and a User to link them together.</p>
+
+    {% if preusers|length == 0 or users|length == 0 %}
+        <p>No available PreUsers or Users to merge.</p>
+    {% else %}
+    <form method="POST">
+        <div class="form-group">
+            <label for="pre_user_id">Select PreUser:</label>
+            <select name="pre_user_id" id="pre_user_id" required>
+                <option value="" disabled selected>Choose PreUser</option>
+                {% for pu in preusers %}
+                <option value="{{ pu.id }}">{{ pu.name }}{% if pu.email %} ({{ pu.email }}){% endif %}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="user_id">Select User:</label>
+            <select name="user_id" id="user_id" required>
+                <option value="" disabled selected>Choose User</option>
+                {% for u in users %}
+                <option value="{{ u.id }}">{{ u.name }} ({{ u.email }})</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn-submit">Merge</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Add Column{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Add Column to Table</h1>
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="table_id">Select Table:</label>
+            <select name="table_id" id="table_id" required>
+                <option value="" disabled selected>Choose Table</option>
+                {% for t in tables %}
+                <option value="{{ t.id }}">{{ t.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="column_name">Column Name:</label>
+            <input type="text" name="column_name" id="column_name" placeholder="Enter column name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="datatype">Data Type:</label>
+            <select name="datatype" id="datatype" required>
+                <option value="string">String</option>
+                <option value="int">Integer</option>
+                <option value="float">Float</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn-submit">Add Column</button>
+    </form>
+</div>
+{% endblock %}

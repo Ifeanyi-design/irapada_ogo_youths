@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h1>Welcome, {{ current_user.name }}</h1>
+
+    <div class="profile-circle dashboard-profile" style="width: 200px; height: 200px;">
+        {% if current_user.profile_image %}
+            <img src="{{ url_for('static', filename='uploads/' ~ current_user.profile_image) }}" alt="Profile Image">
+        {% else %}
+            <span>{{ current_user.gender[0] if current_user.gender else '?' }}</span>
+        {% endif %}
+    </div>
+
+    <!-- Quick Action Cards -->
+    <div class="dashboard-cards">
+        <a href="{{ url_for('contributions') }}" class="dashboard-card">
+            <h3>Your Contributions</h3>
+            <p>View all your logged contributions</p>
+        </a>
+
+        <a href="{{ url_for('account_settings') }}" class="dashboard-card">
+            <h3>Account Settings</h3>
+            <p>Update personal info & profile</p>
+        </a>
+
+        {% if current_user.admin %}
+        <a href="{{ url_for('admin_preuser') }}" class="dashboard-card admin-card">
+            <h3>Manage PreUsers</h3>
+            <p>{{ pre_users | length }} preusers</p>
+        </a>
+        <a href="{{ url_for('admin_users') }}" class="dashboard-card admin-card">
+            <h3>Manage Users</h3>
+            <p>{{ users | length }} users</p>
+        </a>
+        <a href="{{ url_for('admin_log_contribution') }}" class="dashboard-card admin-card">
+            <h3>Log Contributions (Admin)</h3>
+            <p>Add contributions for anyone</p>
+        </a>
+        <a href="{{ url_for('admin_export_filtered') }}" class="dashboard-card admin-card">
+            <h3>Reports</h3>
+            <p>Export filtered data</p>
+        </a>
+        {% endif %}
+    </div>
+
+    <!-- Recent Contributions Table -->
+    <div class="recent-contributions">
+    <h2>Recent Contributions</h2>
+    {% if table_map %}
+        {% for table_id, contributions in table_map.items() %}
+            {% set cols = contributions|map(attribute='column')|list %}
+            {% set table_name = contributions[0].table_owner.name if contributions[0].table_owner else 'N/A' %}
+
+            <h3>{{ table_name }}</h3>
+            <div class="table-responsive">
+                <table class="table admin-table table-bordered contributions-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            {% for col in cols %}
+                                <th>{{ col.name }}</th>
+                            {% endfor %}
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for preuser in pre_users %}
+                            <tr>
+                                <td>{{ preuser.name }}</td>
+                                {% for col in cols %}
+                                    {% set content = contributions
+                                        |selectattr('pre_user_id','equalto',preuser.id)
+                                        |selectattr('column_id','equalto',col.id)
+                                        |first %}
+                                    <td>{{ content.value if content else '' }}</td>
+                                {% endfor %}
+                                <td>
+                                    {% set latest_content = contributions
+                                        |selectattr('pre_user_id','equalto',preuser.id)
+                                        |sort(attribute='created_at',reverse=true)
+                                        |first %}
+                                    {{ latest_content.created_at.strftime('%Y-%m-%d') if latest_content else '' }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <br>
+        {% endfor %}
+    {% else %}
+        <p>No recent contributions yet.</p>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

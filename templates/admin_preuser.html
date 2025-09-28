@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Manage PreUsers{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Create New PreUser</h1>
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" placeholder="Enter name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" placeholder="Enter email">
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="text" name="phone" id="phone" placeholder="Enter phone number">
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender">
+                <option value="" disabled selected>Choose gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn-submit">Create PreUser</button>
+    </form>
+
+    <h2 style="margin-top:30px;">Existing PreUsers</h2>
+    {% if pre_users|length == 0 %}
+        <p>No PreUsers found.</p>
+    {% else %}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Gender</th>
+                <th>Registered</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pu in pre_users %}
+            <tr>
+                <td>{{ pu.name }}</td>
+                <td>{{ pu.email or '-' }}</td>
+                <td>{{ pu.phone or '-' }}</td>
+                <td>{{ pu.gender or '-' }}</td>
+                <td>{{ 'Yes' if pu.user else 'No' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock %}

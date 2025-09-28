@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Youth Portal{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .profile-dropdown a:hover{
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="{{ url_for('dashboard') }}" class="nav-logo">Youth Portal</a>
+    </div>
+
+    <div class="navbar-right">
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('contributions') }}">Contributions</a>
+        <a href="{{ url_for('account_settings') }}">Manage Account</a>
+
+        {% if current_user.admin %}
+            <a href="{{ url_for('admin_mass_data') }}">Admin Panel</a>
+        {% endif %}
+
+        <!-- Profile Circle Dropdown -->
+        <div class="navbar-profile">
+            <div class="profile-circle" id="profileToggle">
+                {% if current_user.profile_image %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ current_user.profile_image) }}" alt="Profile Image">
+                {% else %}
+                    <span>{{ current_user.gender[0] if current_user.gender else '?' }}</span>
+                {% endif %}
+            </div>
+            <div class="profile-dropdown" id="profileDropdown">
+                <a href="{{ url_for('account_settings') }}" style="color: green; width: 100%;">Account Settings</a>
+                <a href="{{ url_for('logout') }}" style="color: green">Logout</a>
+            </div>
+        </div>
+        {% else %}
+            {% if request.endpoint != "login" %}
+            <a href="{{ url_for('login') }}" class="btn" style="color: white; border: 2px solid white;">Login</a>
+            {% elif request.endpoint != "register" %}
+            <a href="{{ url_for('register') }}" class="btn" style="color: white; border: 2px solid white;">Register</a>
+            {% endif %}
+        {% endif %}
+    </div>
+</nav>
+
+
+
+<div class="content">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+            <div class="flash">{{ message }}</div>
+            {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.getElementById('profileToggle');
+    const dropdown = document.getElementById('profileDropdown');
+
+    toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Close dropdown if clicked outside
+    document.addEventListener('click', function() {
+        dropdown.style.display = 'none';
+    });
+});
+</script>
+
+</body>
+</html>

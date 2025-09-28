@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Manage Users{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Manage Users</h1>
+
+    {% if users|length == 0 %}
+        <p>No other users found.</p>
+    {% else %}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Admin</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in users %}
+            <tr>
+                <td>{{ u.name }}</td>
+                <td>{{ u.email }}</td>
+                <td>{{ 'Yes' if u.admin else 'No' }}</td>
+                <td>
+                    <form method="POST" style="display:inline;">
+                        <input type="hidden" name="user_id" value="{{ u.id }}">
+                        {% if u.admin %}
+                        <button type="submit" name="action" value="remove_admin" class="btn-submit small-btn">Remove Admin</button>
+                        {% else %}
+                        <button type="submit" name="action" value="make_admin" class="btn-submit small-btn">Make Admin</button>
+                        {% endif %}
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Contributions{% endblock %}
+
+{% block content %}
+<div class="contributions-container">
+    <h2>Contributions</h2>
+
+    {% if table_map %}
+        {% for table_id, contributions in table_map.items() %}
+            {% set cols = contributions|map(attribute='column')|list %}
+            {% set table_name = contributions[0].table_owner.name if contributions[0].table_owner else 'N/A' %}
+
+            <h3>{{ table_name }}</h3>
+            <div class="table-responsive">
+                <table class="table admin-table table-bordered contributions-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            {% for col in cols %}
+                                <th>{{ col.name }}</th>
+                            {% endfor %}
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for preuser in pre_users %}
+                            <tr>
+                                <td>{{ preuser.name }}</td>
+                                {% for col in cols %}
+                                    {% set content = contributions
+                                        |selectattr('pre_user_id','equalto',preuser.id)
+                                        |selectattr('column_id','equalto',col.id)
+                                        |first %}
+                                    <td>{{ content.value if content else '' }}</td>
+                                {% endfor %}
+                                <td>
+                                    {% set latest_content = contributions
+                                        |selectattr('pre_user_id','equalto',preuser.id)
+                                        |sort(attribute='created_at',reverse=true)
+                                        |first %}
+                                    {{ latest_content.created_at.strftime('%Y-%m-%d') if latest_content else '' }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <br>
+        {% endfor %}
+    {% else %}
+        <p>No contributions yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

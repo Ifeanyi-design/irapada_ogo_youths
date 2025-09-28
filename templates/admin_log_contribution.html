@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Log Contribution{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Log New Contribution</h1>
+
+    <form method="POST">
+        <!-- PreUser Selection -->
+        <label for="pre_user_select">Select PreUser:</label>
+        <select name="pre_user_select" id="pre_user_select" required onchange="fillPreUserName()">
+            <option value="" disabled selected>Choose PreUser</option>
+            {% for pu in pre_users %}
+            <option value="{{ pu.id }}" data-name="{{ pu.name }}">{{ pu.name }}{% if pu.user %} (Registered){% endif %}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Prefilled Name -->
+        <label for="pre_user_name">Name:</label>
+        <input type="text" id="pre_user_name" readonly>
+        <input type="hidden" name="pre_user_id" id="pre_user_id">
+
+        <!-- Table Selection -->
+        <label for="table_select">Select Table:</label>
+        <select name="table_select" id="table_select" required onchange="showColumns()">
+            <option value="" disabled selected>Choose Table</option>
+            {% for t in tables %}
+            <option value="{{ t.id }}">{{ t.name }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Column Inputs -->
+        <div id="columns-container">
+            <!-- Column input fields will appear here dynamically -->
+        </div>
+
+        <button type="submit" class="btn-submit">Log Contribution</button>
+    </form>
+</div>
+
+<script>
+    // Columns grouped by table
+    const tableColumns = {{ all_columns_for_table | tojson }};
+
+    // Prefill Name field when a PreUser is selected
+    function fillPreUserName() {
+        const select = document.getElementById('pre_user_select');
+        const nameInput = document.getElementById('pre_user_name');
+        const hiddenId = document.getElementById('pre_user_id');
+
+        const selectedOption = select.options[select.selectedIndex];
+        nameInput.value = selectedOption.getAttribute('data-name');
+        hiddenId.value = select.value;
+    }
+
+    // Show all columns for the selected table
+    function showColumns() {
+        const tableSelect = document.getElementById('table_select');
+        const container = document.getElementById('columns-container');
+        container.innerHTML = '';
+
+        const tableId = tableSelect.value;
+        if (!tableId || !(tableId in tableColumns)) return;
+
+        tableColumns[tableId].forEach(col => {
+            const label = document.createElement('label');
+            label.setAttribute('for', `column_${col.id}`);
+            label.textContent = col.name + ':';
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = `column_${col.id}`;
+            input.id = `column_${col.id}`;
+            input.placeholder = `Enter value for ${col.name}`;
+
+            container.appendChild(label);
+            container.appendChild(input);
+        });
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Log Contribution{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Log New Contribution</h1>
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="table_id">Select Table:</label>
+            <select name="table_id" id="table_id" required>
+                <option value="" disabled selected>Choose Table</option>
+                {% for t in tables %}
+                <option value="{{ t.id }}">{{ t.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="column_id">Select Column:</label>
+            <select name="column_id" id="column_id" required>
+                <option value="" disabled selected>Choose Column</option>
+                {% for c in columns %}
+                <option value="{{ c.id }}">{{ c.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="value">Value:</label>
+            <input type="text" name="value" id="value" placeholder="Enter contribution value" required>
+        </div>
+
+        <button type="submit" class="btn-submit">Log Contribution</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="dashboard-container">
+    <h1>Admin Dashboard</h1>
+
+    <div class="dashboard-sections">
+
+        <div class="dashboard-card">
+            <h2>PreUser Management</h2>
+            <a href="{{ url_for('admin_preuser') }}"><button class="btn">Manage PreUsers</button></a>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Tables & Columns</h2>
+            <a href="{{ url_for('admin_create_table') }}"><button class="btn">Create Table</button></a>
+            <a href="{{ url_for('admin_add_column') }}"><button class="btn">Add Column</button></a>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Contributions</h2>
+            <a href="{{ url_for('admin_log_contribution') }}"><button class="btn">Log Contribution</button></a>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Link PreUsers to Users</h2>
+            <a href="{{ url_for('admin_merge') }}"><button class="btn">Link PreUsers</button></a>
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Export Reports</h2>
+
+            <a href="{{ url_for('admin_export_filtered') }}" class="btn">Export Filtered</a>
+
+        </div>
+
+        <div class="dashboard-card">
+            <h2>Manage Users</h2>
+            <a href="{{ url_for('admin_users') }}"><button class="btn">Update Roles</button></a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
