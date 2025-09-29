@@ -3,9 +3,9 @@
 
 {% block content %}
 <div class="dashboard-container">
-    <h1>Welcome, {{ current_user.name }}</h1>
+    <h1 class="welcome">Welcome, {{ current_user.name }}</h1>
 
-    <div class="profile-circle dashboard-profile" style="width: 200px; height: 200px;">
+    <div class="profile-circle dashboard-profile" style="width: 300px; height: 300px;">
         {% if current_user.profile_image %}
             <img src="{{ url_for('static', filename='uploads/' ~ current_user.profile_image) }}" alt="Profile Image">
         {% else %}

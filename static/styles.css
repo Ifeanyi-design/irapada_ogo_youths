@@ -1058,6 +1058,79 @@ body {
         display: flex;
         justify-content: center;
     }
+    .navbar .navbar-right a{
+        font-size: 150%;
+    }
+
+    .dashboard-card {
+        flex: 1 1 300px;
+        height: 200px;
+        text-align: center;
+        font-size: 170%;
+    }
+    .dashboard-cards a{
+        width: 100%;
+        border: none;
+    }
+    .recent-contributions h2{
+        font-size: 50px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: green;
+        color: white;
+        text-align: center;
+    }
+    .recent-contributions h3{
+        font-size: 30px;
+        text-align: center;
+        padding-bottom: 0px;
+
+    }
+    .recent-contributions table th{
+        font-size: 30px;
+    }
+    .recent-contributions table td{
+        font-size: 15px;
+    }
+    .contributions-container h2{
+        font-size: 50px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: green;
+        color: white;
+        text-align: center;
+    }
+    .contributions-container h3{
+        font-size: 30px;
+        text-align: center;
+        padding-bottom: 0px;
+
+    }
+    .contributions-container table th{
+        font-size: 30px;
+    }
+    .contributions-container table td{
+        font-size: 15px;
+    }
+    .contributions-container table tfoot td{
+        font-size: 20px;
+    }
+    .contributions-container table tfoot tr{
+        background-color: green !important;
+        color: white;
+    }
+    .welcome{
+        text-align: center;
+        font-size: 40px;
+        border: 3px solid green;
+        border-radius: 50px;
+        color: green;
+    }
+    .navbar .navbar-right .profile-circle{
+        width: 90px ;
+        height: 90px;
+        margin-top: 20px;
+    }
     .navbar .navbar-right .btn:hover{
         background-color: white;
         color: green !important;
@@ -1078,6 +1151,71 @@ body {
 
 /* Mobile screens */
 @media (max-width: 768px) {
+    .dashboard-card {
+        flex: 1 1 300px;
+        height: 200px;
+        text-align: center;
+        font-size: 170%;
+    }
+    .dashboard-cards a{
+        width: 100%;
+        border: none;
+    }
+    .recent-contributions h2{
+        font-size: 50px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: green;
+        color: white;
+        text-align: center;
+    }
+    .recent-contributions h3{
+        font-size: 30px;
+        text-align: center;
+        padding-bottom: 0px;
+
+    }
+    .recent-contributions table th{
+        font-size: 30px;
+    }
+    .recent-contributions table td{
+        font-size: 15px;
+    }
+    .contributions-container h2{
+        font-size: 50px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: green;
+        color: white;
+        text-align: center;
+    }
+    .contributions-container h3{
+        font-size: 30px;
+        text-align: center;
+        padding-bottom: 0px;
+
+    }
+    .contributions-container table th{
+        font-size: 30px;
+    }
+    .contributions-container table td{
+        font-size: 15px;
+    }
+    .contributions-container table tfoot td{
+        font-size: 20px;
+    }
+    .contributions-container table tfoot tr{
+        background-color: green !important;
+        color: white;
+    }
+    .welcome{
+        text-align: center;
+        font-size: 40px;
+        border: 3px solid green;
+        border-radius: 50px;
+        color: green;
+    }
+
     .navbar{
         height: 5%;
     }
