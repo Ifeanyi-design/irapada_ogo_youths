@@ -229,9 +229,15 @@ def contributions():
         pre_users = [pre_user]
 
     # Group contributions by table
-    table_map = defaultdict(list)
+    table_map = defaultdict(lambda: {"contributions": [], "columns": []})
     for c in contributions:
-        table_map[c.table_id].append(c)
+        table_map[c.table_id]["contributions"].append(c)
+        if c.column not in table_map[c.table_id]["columns"]:
+            table_map[c.table_id]["columns"].append(c.column)
+
+    # Sort columns by their ID (stable order)
+    for table_id in table_map:
+        table_map[table_id]["columns"].sort(key=lambda col: col.id)
 
     # Pass table_map and pre_users to template
     return render_template(
