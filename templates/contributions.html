@@ -43,6 +43,25 @@
                             </tr>
                         {% endfor %}
                     </tbody>
+
+                    {# --- Total row --- #}
+                    {% set amount_col = cols|selectattr("name","equalto","Amount")|first %}
+                    {% if amount_col %}
+                        {% set total = contributions
+                            |selectattr('column_id','equalto',amount_col.id)
+                            |map(attribute='value')
+                            |map('float')
+                            |sum %}
+                        <tfoot>
+                            <tr style="background-color: #f8f9fa; font-weight: bold;">
+                                <td colspan="{{ cols|length }}">
+                                    Total
+                                </td>
+                                <td>{{ total }}</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    {% endif %}
                 </table>
             </div>
             <br>
