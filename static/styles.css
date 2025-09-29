@@ -1143,10 +1143,10 @@ body {
         grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
     }
     .dashboard-sections .dashboard-card a{
-        font-size: 20px;
+        font-size: 30px;
     }
     .dashboard-sections .dashboard-card a .btn{
-        font-size: 30px;
+        font-size: 20px;
     }
     .form-container {
         width: 80%;
@@ -1352,4 +1352,21 @@ body {
         font-size: 0.9rem;
         padding: 10px;
     }
+}
+
+.dashboard-sections .dashboard-card a{
+   border: 2px solid white;
+   border-radius: 10px;
+}
+.dashboard-sections .dashboard-card a .btn{
+  border: 2px solid white;
+  border-radius: 10px;
+}
+.dashboard-sections .dashboard-card a:hover{
+   background-color: white;
+   color: green;
+}
+.dashboard-sections .dashboard-card a .btn:hover{
+  background-color: white;
+  color: green;
 }
