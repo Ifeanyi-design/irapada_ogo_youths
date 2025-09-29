@@ -1267,6 +1267,10 @@ body {
         justify-content: center;
         align-items: center;
     }
+    .account-container{
+        max-width: 70% !important;
+        height: 60vh;
+    }
     .auth-form input{
         width: 70%;
         height: 50px;
@@ -1354,19 +1358,13 @@ body {
     }
 }
 
-.dashboard-sections .dashboard-card a{
-   border: 2px solid white;
-   border-radius: 10px;
-}
-.dashboard-sections .dashboard-card a .btn{
+
+.dashboard-sections .dashboard-card .btn{
   border: 2px solid white;
   border-radius: 10px;
 }
-.dashboard-sections .dashboard-card a:hover{
-   background-color: white;
-   color: green;
-}
-.dashboard-sections .dashboard-card a .btn:hover{
+
+.dashboard-sections .dashboard-card .btn:hover{
   background-color: white;
   color: green;
 }
