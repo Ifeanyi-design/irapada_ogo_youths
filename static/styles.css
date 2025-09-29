@@ -1145,6 +1145,9 @@ body {
     .dashboard-sections .dashboard-card a{
         font-size: 20px;
     }
+    .dashboard-sections .dashboard-card a .btn{
+        font-size: 30px;
+    }
     .form-container {
         width: 80%;
         padding: 20px;
