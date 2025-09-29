@@ -1,3 +1,10 @@
+body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+        }
+
 .gender-circle {
     width: 80px;
     height: 80px;
@@ -11,11 +18,6 @@
     animation: pulse 1.5s infinite;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
 
 
 
@@ -81,20 +83,6 @@
     gap: 20px;
 }
 
-.profile-circle {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background-color: #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 50px;
-    color: white;
-    text-transform: uppercase;
-    animation: pulse 2s infinite;
-    overflow: hidden;
-}
 
 .profile-circle.male {
     background-color: #4a90e2;
@@ -111,12 +99,7 @@
     border-radius: 50%;
 }
 
-/* Simple pulse animation */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
+
 
 /* Account form */
 .account-form {
@@ -226,11 +209,6 @@
     margin-top: 15px;
 }
 
-.admin-table th, .admin-table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
 
 .admin-table th {
     background-color: #f2f2f2;
@@ -424,13 +402,7 @@
     margin-bottom: 20px;
 }
 
-.profile-circle {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #4CAF50;
-}
+
 
 .profile-circle.placeholder {
     display: flex;
@@ -451,11 +423,7 @@
     background-color: #e91e63;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.05); opacity: 0.8; }
-    100% { transform: scale(1); opacity: 1; }
-}
+
 
 .account-form {
     display: flex;
@@ -770,21 +738,7 @@
     background-color: #45a049;
 }
 
-.profile-circle {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: #4CAF50;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 36px;
-    font-weight: bold;
-    margin: 0 auto 20px auto;
-    overflow: hidden;
-    animation: pulse 2s infinite;
-}
+
 
 .profile-circle img {
     width: 100%;
@@ -845,6 +799,8 @@
     cursor: pointer;
     overflow: hidden;
     border: 2px solid white;
+    margin: 0 auto 20px auto;
+    animation: pulse 2s infinite;
 }
 
 .profile-circle img {
@@ -1029,4 +985,222 @@
 .btn-submit.small-btn {
     padding: 6px 10px;
     font-size: 0.85rem;
+}
+
+@media (max-width: 992px) {
+    .auth-container{
+        max-width: 70% !important;
+        height: 30vh;
+
+    }
+    .reg{
+        height: 51vh;
+    }
+    .auth-container h1{
+        font-size: 80px;
+        margin-top: 0px;
+        background-color: green;
+        color: white !important;
+        padding: 5px;
+        border-radius: 25px 25px 0px 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .auth-form input{
+        width: 70%;
+        height: 50px;
+        margin-bottom: 50px;
+    }
+    .auth-form.reg input{
+        width: 95%;
+        height: 50px;
+        margin-bottom: 25px;
+    }
+    .auth-form.reg select{
+        width: 100%;
+        height: 50px;
+        margin-bottom: 25px;
+    }
+    .auth-form{
+        width: 100%;
+    }
+    .auth-form p{
+        font-size: 170%;
+    }
+    .align{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    }
+    .auth-form label{
+        font-size: 200%;
+    }
+    .auth-form .btn{
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 70px;
+        font-size: 40px;
+    }
+    .navbar{
+        height: 5%;
+    }
+    .navbar .navbar-left a{
+        font-size: 240%;
+    }
+    .navbar .navbar-right .btn{
+        width: 240px;
+        height: 50px
+        text-align: center;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+    }
+    .navbar .navbar-right .btn:hover{
+        background-color: white;
+        color: green !important;
+    }
+    .navbar .navbar-right .btn{
+        font-size: 300%;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+    }
+
+    .form-container {
+        width: 80%;
+        padding: 20px;
+    }
+}
+
+/* Mobile screens */
+@media (max-width: 768px) {
+    .navbar{
+        height: 5%;
+    }
+    .navbar .navbar-left a{
+        font-size: 240%;
+    }
+    .navbar .navbar-right .btn{
+        width: 240px;
+        height: 50px
+        text-align: center;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+    }
+    .navbar .navbar-right .btn:hover{
+        background-color: white;
+        color: green !important;
+    }
+    .navbar .navbar-right .btn{
+        font-size: 300%;
+    }
+    .auth-container{
+        max-width: 70% !important;
+        height: 30vh;
+
+    }
+    .reg{
+        height: 51vh;
+    }
+    .auth-container h1{
+        font-size: 80px;
+        margin-top: 0px;
+        background-color: green;
+        color: white !important;
+        padding: 5px;
+        border-radius: 25px 25px 0px 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .auth-form input{
+        width: 70%;
+        height: 50px;
+        margin-bottom: 50px;
+    }
+    .auth-form.reg input{
+        width: 95%;
+        height: 50px;
+        margin-bottom: 25px;
+    }
+    .auth-form.reg select{
+        width: 100%;
+        height: 50px;
+        margin-bottom: 25px;
+    }
+    .auth-form{
+        width: 100%;
+    }
+    .auth-form p{
+        font-size: 170%;
+    }
+    .align{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    }
+    .auth-form label{
+        font-size: 200%;
+    }
+    .auth-form .btn{
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 70px;
+        font-size: 40px;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: 1fr; /* 1 card per row */
+    }
+
+    .form-container,
+    .auth-form {
+        width: 100%;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: none; /* simplify design on small screens */
+    }
+
+    h1, h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    button,
+    .btn-submit {
+        width: 100%;
+        font-size: 1rem;
+        padding: 12px;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 480px) {
+    .navbar {
+        font-size: 0.9rem;
+    }
+
+    .form-container,
+    .auth-form {
+        padding: 10px;
+    }
+
+    input,
+    select {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    button,
+    .btn-submit {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
 }

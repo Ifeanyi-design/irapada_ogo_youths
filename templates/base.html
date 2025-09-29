@@ -8,7 +8,10 @@
         .profile-dropdown a:hover{
             color: white !important;
         }
+        {% block style %}
+        {% endblock %}
     </style>
+
 </head>
 <body>
 
@@ -42,9 +45,9 @@
         </div>
         {% else %}
             {% if request.endpoint != "login" %}
-            <a href="{{ url_for('login') }}" class="btn" style="color: white; border: 2px solid white;">Login</a>
+            <a href="{{ url_for('login') }}" class="btn" style="color: white; border: 4px solid white;">Login</a>
             {% elif request.endpoint != "register" %}
-            <a href="{{ url_for('register') }}" class="btn" style="color: white; border: 2px solid white;">Register</a>
+            <a href="{{ url_for('register') }}" class="btn" style="color: white; border: 4px solid white;">Register</a>
             {% endif %}
         {% endif %}
     </div>
