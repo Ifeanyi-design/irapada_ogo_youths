@@ -1007,6 +1007,10 @@ body {
         justify-content: center;
         align-items: center;
     }
+    .account-container{
+        max-width: 70% !important;
+        height: 60vh;
+    }
     .auth-form input{
         width: 70%;
         height: 50px;
@@ -1267,10 +1271,7 @@ body {
         justify-content: center;
         align-items: center;
     }
-    .account-container{
-        max-width: 70% !important;
-        height: 60vh;
-    }
+
     .auth-form input{
         width: 70%;
         height: 50px;
