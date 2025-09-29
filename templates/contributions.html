@@ -7,8 +7,7 @@
 
     {% if table_map %}
         {% for table_id, contributions in table_map.items() %}
-            {# Deduplicate columns by id #}
-            {% set cols = contributions|map(attribute='column')|unique(attribute='id')|list %}
+            {% set cols = columns_map[table_id] %}
             {% set table_name = contributions[0].table_owner.name if contributions[0].table_owner else 'N/A' %}
 
             <h3>{{ table_name }}</h3>
