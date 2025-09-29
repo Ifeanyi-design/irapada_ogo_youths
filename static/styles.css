@@ -1147,6 +1147,9 @@ body {
         width: 80%;
         padding: 20px;
     }
+    .dashboard-sections {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
 }
 
 /* Mobile screens */
