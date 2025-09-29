@@ -228,22 +228,21 @@ def contributions():
         )
         pre_users = [pre_user]
 
-    # Group contributions by table
-    table_map = defaultdict(lambda: {"contributions": [], "columns": []})
+    # Group contributions by table (like dashboard)
+    table_map = defaultdict(list)  # table_id -> list of Content objects
     for c in contributions:
-        table_map[c.table_id]["contributions"].append(c)
-        if c.column not in table_map[c.table_id]["columns"]:
-            table_map[c.table_id]["columns"].append(c.column)
+        table_map[c.table_id].append(c)
 
-    # Sort columns by their ID (stable order)
-    for table_id in table_map:
-        table_map[table_id]["columns"].sort(key=lambda col: col.id)
+    # Prepare columns per table (deduplicated)
+    columns_map = {}
+    for table_id, contribs in table_map.items():
+        columns_map[table_id] = list({c.column for c in contribs if c.column})
 
-    # Pass table_map and pre_users to template
     return render_template(
         'contributions.html',
         table_map=table_map,
-        pre_users=pre_users
+        pre_users=pre_users,
+        columns_map=columns_map
     )
 
 @app.route('/log-contribution', methods=['GET', 'POST'])
