@@ -2,7 +2,7 @@
 {% block title %}Account Settings{% endblock %}
 
 {% block content %}
-<div class="profile-circle" style="width: 150px; height: 150px; margin-top: 5%;;">
+<div class="profile-circle account" style="width: 150px; height: 150px; margin-top: 5%;;">
     {% if user.profile_image %}
         <img src="{{ url_for('static', filename='uploads/' ~ user.profile_image) }}" alt="Profile Image">
     {% else %}
@@ -34,7 +34,8 @@
         <input type="password" name="password">
 
         <button type="submit" class="btn">Update Account</button>
+        <a href="{{ url_for('logout') }}" class="btn logout" style="color: white;">Logout</a>
     </form>
-    <a href="{{ url_for('logout') }}" class="btn" style="color: white;">Logout</a>
+
 </div>
 {% endblock %}
