@@ -7,7 +7,8 @@
 
     {% if table_map %}
         {% for table_id, contributions in table_map.items() %}
-            {% set cols = contributions|map(attribute='column')|list %}
+            {# Deduplicate columns by id #}
+            {% set cols = contributions|map(attribute='column')|unique(attribute='id')|list %}
             {% set table_name = contributions[0].table_owner.name if contributions[0].table_owner else 'N/A' %}
 
             <h3>{{ table_name }}</h3>
@@ -54,10 +55,14 @@
                             |sum %}
                         <tfoot>
                             <tr style="background-color: #f8f9fa; font-weight: bold;">
-                                <td colspan="{{ cols|length }}">
-                                    Total
-                                </td>
-                                <td>{{ total }}</td>
+                                <td>Total</td>
+                                {% for col in cols %}
+                                    {% if col.id == amount_col.id %}
+                                        <td>{{ total }}</td>
+                                    {% else %}
+                                        <td></td>
+                                    {% endif %}
+                                {% endfor %}
                                 <td></td>
                             </tr>
                         </tfoot>
